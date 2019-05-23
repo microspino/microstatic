@@ -48,7 +48,7 @@
   <header>
     <h1><a href="/">DraG &amp; DroP</a></h1>
     <p class="subhead">
-      Sperimentazione drag and drop tra tabelle. Ogni tabella ha la riga di intestazione fissa.
+      <strong>Istruzioni:</strong> Sperimentazione drag and drop tra tabelle. Ogni tabella ha la riga di intestazione fissa.
       <br/> Spostare i box da una tabella all&#x27;altra. Il box viene copiato se &egrave; attiva la casella &#x27;copia&#x27; altrimenti viene spostato.
     </p>
   </header>
@@ -185,7 +185,6 @@
     
     function drop(e) {
       e.dataTransfer.dropEffect = 'copyMove';
-      // console.log('dropped ' + dragged.id + ' on ' + e.target.id);
       e.target.appendChild(document.getElementById('copia').checked ? dragged.cloneNode(true) : dragged);
       e.preventDefault();
     }
