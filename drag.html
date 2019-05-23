@@ -28,18 +28,29 @@
     header h1 a { color: rgba(108,130,137,1); text-decoration: none; }
     h2 { font-size: 1.3em; line-height: .9em; display: inline-block}
     h2 a { font-weight: normal; text-decoration: none; }
-    #content { margin: 0 5%; width: 90%; }
-    article { cursor:grab;padding:1px;background:#fff; width:60px;border:1px solid black;margin-bottom:5px;text-align:center;margin:0 auto;}
-
+    #content { margin: 0 5%; width: 90%; position:relative;}
+    
+    article { cursor:grab;padding:1px;background:#fff; width:60px;border:1px solid black;margin-bottom:5px;text-align:center;margin:0 auto;position:relative;}
+    article input.toggle { display:none;}
+    article label { position:absolute;top:0;right:0;width:14px;cursor:pointer;}
+    article label:hover { color:red; }
+    article div.menu{width:86px;border:1px solid #ccc;padding:0 5px;border-radius:3px;background:#fff;position:absolute;z-index:9;top:-1px;left:64px;display:none;}
+    article label.close {display:none;}
+    article > input[type=checkbox]:checked ~ label.close {display:block;}
+    article > input[type=checkbox]:checked ~ label.open {display:none;}
+    article > input[type=checkbox]:checked ~ div.menu { display:block; }
+    
     .days {display: flex; justify-content: space-around; }
     .days div {background: #ccc;text-align:center; width:12.4%;}
     .days div:first-child {background:transparent;}
     .days div:last-child {width:17px;}
     .fixhead { overflow:auto;height:200px; margin-bottom:2em;}
-    .fixhead table { width:100%;table-layout:fixed;border-collapse:collapse;white-space:nowrap; margin:0;}
+    .fixhead table { width:100%;table-layout:fixed;border-collapse:collapse;white-space:nowrap; margin:0; }
     .fixhead table thead {position:sticky;}
     .fixhead table th { background:#ccc;color:#fff;border:1px solid #eee;}
-    .fixhead table td { background:#fff;border:1px solid #ccc;height:2em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+    .fixhead table td { background:#fff;border:1px solid #ccc;height:2em;white-space:nowrap;}
+    .fixhead table td:nth-child(odd) { background:#eee;}
+    
     
   </style>
 </head>
@@ -73,10 +84,41 @@
       <table ondrop="drop(event)">
         <tbody>
           <tr>
-            <td></td><td></td> <td></td> <td></td> <td></td> <td><article draggable="true" data-drag="dati uno">UNO</article></td> <td></td> <td></td>
+            <td></td><td></td> <td></td> <td></td> <td></td> 
+            <td onclick="handleAction(event)">
+              <article draggable="true" data-drag="dati uno">
+                <input type="checkbox" id="toggle-1" class='toggle'>
+                <label for="toggle-1" class="open" onclick="menu(event)">&raquo;</label>
+                <label for="toggle-1" class="close">&laquo;</label>
+                <div id="menu" class="menu">
+                  <ul>
+                    <li>Modifica</li>
+                    <li><a href="#" data-action="kill">Elimina</a></li>
+                    <li>Copia</li>
+                  </ul>
+                </div>
+                UNO
+              </article>
+            </td> 
+            <td></td> <td></td>
           </tr>
           <tr>
-            <td></td> <td></td> <td></td> <td></td> <td><article draggable="true" data-drag="dati tre">TRE</article></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> 
+            <td onclick="handleAction(event)">
+              <article draggable="true" data-drag="dati tre">
+                <input type="checkbox" id="toggle-3" class='toggle'>
+                <label for="toggle-3" class="open" onclick="menu(event)">&raquo;</label>
+                <label for="toggle-3" class="close">&laquo;</label>
+                <div id="menu" class="menu">
+                  <ul>
+                    <li>Modifica</li>
+                    <li><a href="#" data-action="kill">Elimina</a></li>
+                    <li>Copia</li>
+                  </ul>
+                </div>
+                TRE
+              </article>
+            </td> <td></td> <td></td> <td></td>
           </tr>
           <tr>
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
@@ -103,7 +145,22 @@
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
           </tr>
           <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td><article draggable="true" data-drag="dati due">DUE</article></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
+            <td onclick="handleAction(event)">
+              <article draggable="true" data-drag="dati due"">
+                <input type="checkbox" id="toggle-2" class='toggle'>
+                <label for="toggle-2" class="open" onclick="menu(event)">&raquo;</label>
+                <label for="toggle-2" class="close">&laquo;</label>
+                <div id="menu" class="menu">
+                  <ul>
+                    <li>Modifica</li>
+                    <li><a href="#" data-action="kill">Elimina</a></li>
+                    <li>Copia</li>
+                  </ul>
+                </div>
+                DUE
+              </article>
+            </td> <td></td>
           </tr>
         </tbody>
       </table>
@@ -125,10 +182,42 @@
       <table ondrop="drop(event)">
         <tbody>
           <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td><article draggable="true" data-drag="dati a">A</article></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> 
+            <td onclick="handleAction(event)">
+              <article draggable="true" data-drag="dati a"">
+                <input type="checkbox" id="toggle-a" class='toggle'>
+                <label for="toggle-a" class="open" onclick="menu(event)">&raquo;</label>
+                <label for="toggle-a" class="close">&laquo;</label>
+                <div id="menu" class="menu">
+                  <ul>
+                    <li>Modifica</li>
+                    <li><a href="#" data-action="kill">Elimina</a></li>
+                    <li>Copia</li>
+                  </ul>
+                </div>
+                a
+              </article>
+            </td> 
+            <td></td> <td></td>
           </tr>
           <tr>
-            <td></td> <td></td> <td></td> <td></td> <td><article draggable="true" data-drag="dati b">B</article></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> 
+            <td onclick="handleAction(event)">
+              <article draggable="true" data-drag="dati b"">
+                <input type="checkbox" id="toggle-b" class='toggle'>
+                <label for="toggle-b" class="open" onclick="menu(event)">&raquo;</label>
+                <label for="toggle-b" class="close">&laquo;</label>
+                <div id="menu" class="menu">
+                  <ul>
+                    <li>Modifica</li>
+                    <li><a href="#" data-action="kill">Elimina</a></li>
+                    <li>Copia</li>
+                  </ul>
+                </div>
+                b
+              </article>
+            </td> 
+            <td></td> <td></td> <td></td>
           </tr>
           <tr>
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
@@ -155,12 +244,27 @@
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
           </tr>
           <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td><article draggable="true" data-drag="dati c" id="c">C</article></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
+            <td onclick="handleAction(event)">
+              <article draggable="true" data-drag="dati c"">
+                <input type="checkbox" id="toggle-c" class='toggle'>
+                <label for="toggle-c" class="open" onclick="menu(event)">&raquo;</label>
+                <label for="toggle-c" class="close">&laquo;</label>
+                <div id="menu" class="menu">
+                  <ul>
+                    <li>Modifica</li>
+                    <li><a href="#" data-action="kill">Elimina</a></li>
+                    <li>Copia</li>
+                  </ul>
+                </div>
+                c
+              </article>
+            </td> 
+            <td></td>
           </tr>
         </tbody>
       </table>
     </div>
-    
   </div>
   
   <footer id="footer">
@@ -186,6 +290,16 @@
     function drop(e) {
       e.dataTransfer.dropEffect = 'copyMove';
       e.target.appendChild(document.getElementById('copia').checked ? dragged.cloneNode(true) : dragged);
+      e.preventDefault();
+    }
+    
+    function menu(e) {
+      // close open menus by unchecking the others checkboxes
+      Array.forEach(document.querySelectorAll('input.toggle:checked'), function(i) { if (i !== e.target.previousSibling) i.checked = false });
+    }
+    function handleAction(e) {
+      if (!e.target.dataset.action) return;
+      if (e.target.dataset.action == 'kill') e.currentTarget.removeChild(e.currentTarget.querySelector('article'));
       e.preventDefault();
     }
     </script>
