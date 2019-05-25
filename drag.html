@@ -30,26 +30,29 @@
     h2 a { font-weight: normal; text-decoration: none; }
     #content { margin: 0 5%; width: 90%; position:relative;}
     
-    article { cursor:grab;padding:1px;background:#fff; width:60px;border:1px solid #ccc;margin-bottom:5px;text-align:center;margin:0 auto;position:relative;}
-    
-    article label { position:absolute;top:0;right:0;width:14px;cursor:pointer;}
-    article label:hover { color:red; }
+    article { cursor:grab;background:#cee7f0;text-align:center;margin:0 auto;position:relative;display:block;width:8px;height:2em;}
+    article label { position:absolute;top:0;left:0;cursor:pointer;display:block;height:2em;width:100px;background-color:#cee7f0;font-size:10px;}
+
     article div.menu{width:86px;border:1px solid #ccc;padding:0 5px;border-radius:3px;background:#fff;position:absolute;z-index:9;top:-1px;left:64px;}
 
     article > input[type=checkbox] { display:none;}
     article > input[type=checkbox] ~ div.menu { display:none; }
     article > input[type=checkbox]:checked ~ div.menu { display:block; }
     
-    .days {display: flex; justify-content: space-around; }
-    .days div {background: #ccc;text-align:center; width:12.4%;}
-    .days div:first-child {background:transparent;}
-    .days div:last-child {width:17px;}
+    .days div {background: #ccc;text-align:center; width:230px; display: inline-block; margin:0; padding:0;}
+    .days div:first-child {background:transparent;width:48px;}
+    
     .fixhead { overflow:auto;height:200px; margin-bottom:2em;}
-    .fixhead table { width:100%;table-layout:fixed;border-collapse:collapse;white-space:nowrap; margin:0; }
-    .fixhead table thead {position:sticky;}
+    .fixhead table { table-layout:fixed;border-collapse:collapse;white-space:nowrap; margin:0; width:1610px;}
+
     .fixhead table th { background:#ccc;color:#fff;border:1px solid #eee;}
-    .fixhead table td { background:#fff;border:1px solid #ccc;height:2em;white-space:nowrap;}
-    .fixhead table td:nth-child(odd) { background:#eee;}
+    .fixhead table td { background:#fff;height:2em;white-space:nowrap;width:10px;}
+
+    .fixhead table td:first-child { background:beige; width: 48px; }
+    .fixhead table td.h23 {background:beige;}
+/*    .fixhead table td:hover {background-color:#ccc;}*/
+    .fixhead table tr {border-bottom:1px solid beige;}
+    
     
     .fixhead table tr:nth-last-child(-n+4) div.menu {top:-82px;}
   </style>
@@ -59,8 +62,10 @@
   <header>
     <h1><a href="/">DraG &amp; DroP</a></h1>
     <p class="subhead">
-      <strong>Istruzioni:</strong> Sperimentazione drag and drop tra tabelle. Ogni tabella ha la riga di intestazione fissa.
-      <br/> Spostare i box da una tabella all&#x27;altra. Il box viene copiato se &egrave; attiva la casella &#x27;copia&#x27; altrimenti viene spostato.
+      Sperimentazione drag and drop tra tabelle. <strong>Istruzioni:</strong> Ogni tabella ha la riga di intestazione fissa.
+      E' possibile spostare i box da una tabella all&#x27;altra. <br/>
+      Il box viene copiato se &egrave; attiva la casella &#x27;copia&#x27; altrimenti viene spostato.
+      Ogni nodo ha un sottomenu che si apre cliccando su '&raquo;'. Dal menu &egrave; possibile eliminare il nodo.
     </p>
   </header>
   
@@ -68,82 +73,43 @@
     <div class="days">
       <div>
         <input type="checkbox" name="copia" id="copia">
-        <label for="copia">copia</label>
-      </div>
-      <div>luned&igrave;</div>
-      <div>marted&igrave;</div>
-      <div>mercoled&igrave;</div>
-      <div>gioved&igrave;</div>
-      <div>venerd&igrave;</div>
-      <div>sabato</div>
-      <div>domenica</div>
-      <div></div>
+        <label for="copia">cp</label>
+      </div><div>luned&igrave;</div><div>marted&igrave;</div><div>mercoled&igrave;</div><div>gioved&igrave;</div><div>venerd&igrave;</div><div>sabato</div><div>domenica</div>
     </div>
     <div class="fixhead">
       <!-- TOP TABLE -->
-      <table ondrop="drop(event)" onclick="handleAction(event)">
+      <table ondrop="drop(event)" onclick="handleAction(event)" ondragenter="dragEnter(event)" ondragleave="dragLeave(event)">
         <tbody>
           <tr>
-            <td></td><td></td> <td></td> <td></td> <td></td> 
-            <td>
-              <article draggable="true">
-                <input type="checkbox" id="toggle-1">
-                <label for="toggle-1" onclick="menu(event)" >&raquo;</label>
-                <div id="menu" class="menu">
-                  <ul>
-                    <li>Modifica</li>
-                    <li><a href="javascript:void(0);" data-action="kill">Elimina</a></li>
-                    <li>Copia</li>
-                  </ul>
-                </div>
-                UNO
-              </article>
-            </td> 
-            <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> 
-            <td>
-              <article draggable="true">
-                <input type="checkbox" id="toggle-3">
-                <label for="toggle-3" onclick="menu(event)" >&raquo;</label>
-                <div id="menu" class="menu">
-                  <ul>
-                    <li>Modifica</li>
-                    <li><a href="javascript:void(0);" data-action="kill">Elimina</a></li>
-                    <li>Copia</li>
-                  </ul>
-                </div>
-                TRE
-              </article>
-            </td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
+            <td colspan="23"></td>
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
             <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            
+            <td class="h0"></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> 
             <td>
               <article draggable="true">
                 <input type="checkbox" id="toggle-2">
@@ -155,110 +121,169 @@
                     <li>Copia</li>
                   </ul>
                 </div>
-                DUE
               </article>
-            </td> <td></td>
+              <td></td> <td></td> <td></td><td></td>
+            <td></td> <td></td> </td> <td></td> <td></td> <td class="h23"></td> 
+          </tr>
+          <tr>
+            <td colspan="23"></td>
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+          </tr>
+          <tr>
+            <td colspan="23"></td>
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+          </tr>
+          <tr>
+            <td colspan="23"></td>
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+          </tr>
+          <tr>
+            <td colspan="23"></td>
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+          </tr>
+          <tr>
+            <td colspan="23"></td>
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
+            
+            <td class="h0"><td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
+            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td class="h23"></td>
           </tr>
         </tbody>
       </table>
-    </div>  
+    </div>
     
-    <div class="days">
-      <div></div>
-      <div>luned&igrave;</div>
-      <div>marted&igrave;</div>
-      <div>mercoled&igrave;</div>
-      <div>gioved&igrave;</div>
-      <div>venerd&igrave;</div>
-      <div>sabato</div>
-      <div>domenica</div>
-      <div></div>
-    </div>
-    <div class="fixhead">
-      <!-- BOTTOM TABLE -->
-      <table ondrop="drop(event)" onclick="handleAction(event)">
-        <tbody>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> 
-            <td>
-              <article draggable="true">
-                <input type="checkbox" id="toggle-a">
-                <label for="toggle-a" onclick="menu(event)" >&raquo;</label>
-                <div id="menu" class="menu">
-                  <ul>
-                    <li>Modifica</li>
-                    <li><a href="javascript:void(0);" data-action="kill">Elimina</a></li>
-                    <li>Copia</li>
-                  </ul>
-                </div>
-                a
-              </article>
-            </td> 
-            <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> 
-            <td>
-              <article draggable="true">
-                <input type="checkbox" id="toggle-b">
-                <label for="toggle-b"  onclick="menu(event)" >&raquo;</label>
-                <div id="menu" class="menu">
-                  <ul>
-                    <li>Modifica</li>
-                    <li><a href="javascript:void(0);" data-action="kill">Elimina</a></li>
-                    <li>Copia</li>
-                  </ul>
-                </div>
-                b
-              </article>
-            </td> 
-            <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> <td></td>
-          </tr>
-          <tr>
-            <td></td> <td></td> <td></td> <td></td> <td></td> <td></td> 
-            <td>
-              <article draggable="true">
-                <input type="checkbox" id="toggle-c">
-                <label for="toggle-c"  onclick="menu(event)" >&raquo;</label>
-                <div id="menu" class="menu">
-                  <ul>
-                    <li>Modifica</li>
-                    <li><a href="javascript:void(0);" data-action="kill">Elimina</a></li>
-                    <li>Copia</li>
-                  </ul>
-                </div>
-                c
-              </article>
-            </td> 
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </div>
   
   <footer id="footer">
@@ -307,6 +332,16 @@
         while (toKill.tagName != 'ARTICLE') { toKill = toKill.parentNode }
         toKill.parentNode.removeChild(toKill);
       }
+    }
+    
+    function dragEnter(e) {
+      e.target.style.background = "lightblue";
+      e.preventDefault()
+    }
+    
+    function dragLeave(e) {
+      e.target.style.background = "";
+      e.preventDefault()
     }
     </script>
 </body>
