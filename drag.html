@@ -39,14 +39,14 @@
     article > input[type=checkbox] ~ div.menu { display:none; }
     article > input[type=checkbox]:checked ~ div.menu { display:block; }
     
-    .days div {background: #ccc;text-align:center; width:230px; display: inline-block; margin:0; padding:0;}
+    .days div {background: #ccc;text-align:center; width:184px; display: inline-block; margin:0; padding:0;}
     .days div:first-child {background:transparent;width:48px;}
     
     .fixhead { overflow:auto;height:200px; margin-bottom:2em;}
-    .fixhead table { table-layout:fixed;border-collapse:collapse;white-space:nowrap; margin:0; width:1610px;}
+    .fixhead table { table-layout:fixed;border-collapse:collapse;white-space:nowrap; margin:0; width:1288px;}
 
     .fixhead table th { background:#ccc;color:#fff;border:1px solid #eee;}
-    .fixhead table td { background:#fff;height:2em;white-space:nowrap;width:10px;}
+    .fixhead table td { background:#fff;height:2em;white-space:nowrap;width:8px;}
 
     .fixhead table td:first-child { background:beige; width: 48px; }
     .fixhead table td.h23 {background:beige;}
@@ -69,7 +69,7 @@
     </p>
   </header>
   
-  <div id="content" ondragstart="dragStartHandler(event)">
+  <div id="content" ondragstart="dragStart(event)">
     <div class="days">
       <div>
         <input type="checkbox" name="copia" id="copia">
@@ -296,10 +296,11 @@
     
     var dragged;
     
-    function dragStartHandler(e) {
+    function dragStart(e) {
       if (event.target instanceof HTMLElement) {
         dragged = e.target;
-        e.dataTransfer.setData('text/plain', e.target.dataset.drag);
+        e.target.parentNode.style.background = '#fff'
+        e.dataTransfer.setData('text/plain', e.target.dataset.drag); // trasf. dati assoc. al nodo
         e.dataTransfer.effectAllowed = 'copyMove';
       } else {
         e.preventDefault(); // don't allow selection to be dragged
