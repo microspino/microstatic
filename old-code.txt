@@ -1,0 +1,56 @@
+codice vecchio relativo al DRAG (menu dx)
+
+      <!-- 
+        menu apribile con ceckbox trick e azione kill
+        <article draggable="true" data-start="8:15" data-stop="23:37">
+        <input type="checkbox" id="toggle-1">
+        <label for="toggle-1" onclick="menu(event)">1 &raquo;</label>
+        <div id="menu" class="menu">
+          <ul>
+            <li>Modifica</li>
+            <li><a href="javascript:void(0);" data-action="kill">Elimina</a></li>
+            <li>Copia</li>
+          </ul>
+        </div>
+      </article> 
+        
+        codice JS rel. al menu
+        
+        // function drop(e) {
+        //   e.dataTransfer.dropEffect = 'copyMove';
+        //   nodeToAppend = dragged
+        //   if (document.getElementById('copia').checked) {
+        //     // var r = Math.random().toString(36).substring(7)
+        //     var cloned = dragged.cloneNode(true);
+        //     // cloned.querySelector('input').id = r;
+        //     // cloned.querySelector('label').setAttribute('for', r);
+        //     nodeToAppend = cloned
+        //   }
+        //   var i = setWidthAndGetStartIndex(nodeToAppend)
+        //   Array.from(e.target.parentNode.children)[i].appendChild(nodeToAppend)
+        //   e.preventDefault();
+        // }
+        
+        // function menu(e) {
+        //   // close open menus by unchecking the others checkboxes
+        //   Array.forEach(document.querySelectorAll('article input:checked'), function(i) {
+        //     if (i !== e.target.parentNode.querySelector('input:checked')) i.checked = false
+        //   });
+        // }
+    
+        // function handleAction(e) {
+        //   if (e.target.dataset.action == 'kill') {
+        //     var toKill = e.target;
+        //     while (toKill.tagName != 'ARTICLE') { toKill = toKill.parentNode }
+        //     toKill.parentNode.removeChild(toKill);
+        //   }
+        // }
+        
+        CSS rel. al menu e al checkbox trick
+        /* article label { position:absolute;top:0;left:0;cursor:pointer;display:block;height:100%;width:100%;background-color:#cee7f0;font-size:10px;}*/
+        /* article div.menu{width:86px;border:1px solid #ccc;padding:0 5px;border-radius:3px;background:#fff;position:absolute;z-index:9;top:0;left:20px;}*/
+        /*  article > input[type=checkbox] { display:none;}
+         article > input[type=checkbox] ~ div.menu { display:none; }
+          article > input[type=checkbox]:checked ~ div.menu { display:block; }*/
+        
+        -->
