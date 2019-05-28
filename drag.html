@@ -403,15 +403,15 @@
     </div> <!-- end fixhead -->
     
     <div id="grab-area">
-      <article draggable="true" data-start="8:15" data-stop="23:37" data-day="0" title="lun 8:15 - 23:37">
+      <article draggable="true" data-start="0|8:15" data-stop="2|23:37" title="lun 8:15 - mer 23:37">
         <span>1</span>
       </article>
         
-      <article draggable="true" data-start="9:21" data-stop="10:33" data-day="5" title="lun 9:21 - 10:33">
+      <article draggable="true" data-start="5|9:21" data-stop="6|10:33" title="sab 9:21 - dom 10:33">
         <span>2</span>
       </article>
         
-      <article draggable="true" data-start="15:56" data-stop="22:00" data-day="6" title="lun 15:56 - 22:00">
+      <article draggable="true" data-start="6|15:56" data-stop="6|22:00" title="dom 15:56 - dom 22:00">
         <span>3</span>
       </article>
         
@@ -486,24 +486,25 @@
       }
     }
     
-    function dragEnter(e) {
-      // if (e.target.style) e.target.style.background = "red";
-      e.preventDefault()
-    }
+    function dragEnter(e) { e.preventDefault() }
     
-    function dragLeave(e) {
-      // if (e.target.style) e.target.style.background = null;
-      e.preventDefault()
-    }
+    function dragLeave(e) { e.preventDefault() }
     
     function articleCoord(aWorkingLink) {
-      var starthm = aWorkingLink.dataset.start.split(':')
-      var stophm = aWorkingLink.dataset.stop.split(':')
-      var c = (parseInt(starthm[0]) * 6) + (Math.floor(parseInt(starthm[1]) / 10))       
-      var w = (parseInt(stophm[0]) * 6) + (Math.floor(parseInt(stophm[1]) / 10)) - c
-      aWorkingLink.style.width = w + 'px'
-      var d = parseInt(aWorkingLink.dataset.day) * 144
-      return (c + d) 
+      var d1 = aWorkingLink.dataset.start.split('|')[0]
+      var t1 = aWorkingLink.dataset.start.split('|')[1]
+      var h1 = parseInt(t1.split(':')[0]) * 6
+      var m1 = Math.floor(parseInt(t1.split(':')[1]) / 10)
+      var a1 = h1 + m1 + (d1*144)
+      
+      var d2 = aWorkingLink.dataset.stop.split('|')[0]
+      var t2 = aWorkingLink.dataset.stop.split('|')[1]
+      var h2 = parseInt(t2.split(':')[0]) * 6
+      var m2 = Math.floor(parseInt(t2.split(':')[1]) / 10)
+      var a2 = h2 + m2 + (d2*144)
+      
+      aWorkingLink.style.width = (a2 - a1) + 'px'
+      return a1
     }
     </script>
 </body>
