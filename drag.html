@@ -31,7 +31,6 @@
     h2 a { font-weight: normal; text-decoration: none; }
     /* drag specific CSS */
     #content { margin:2em 5%; position:relative; }
-    article { cursor:grab;background:#cee7f0;text-align:center;position:relative;height:8em;}
     .days div {background: #ccc;text-align:center; width:144px; display: inline-block; margin:0; padding:0;}
     .days div:first-child {background:transparent;width:48px;}
     .days div:nth-child(2) {background:coral}
@@ -49,8 +48,8 @@
     .fixhead table tr {border-bottom:1px solid #eee;}
     .fixhead table tr:nth-last-child(-n+4) div.menu {top:-82px;}
     .fixhead table tr:nth-last-child(n+4) div.menu {top:0;}
-    #grab-area {display:flex;}
-    #grab-area article {min-width:300px;}
+    article { cursor:grab;background:#cee7f0;text-align:center;position:relative;height:8em;display:block;}
+    #grab-area article {display:inline-block;}
     #grab-area article+article {margin-left:10px;}
   </style>
 </head>
@@ -65,7 +64,7 @@
       La tabella &egrave; divisa in settimane (righe). Ogni settimana &egrave; composta da 24 * 6 * 7 divisioni. Ogni divisione corrisponde a 10 min.<br/>
       E' possibile vedere le divisioni spostando il mouse sopra la tabella (cursore verde).
       Cliccando su una divisione sarà possibile vis. le coordinate temporali corrisp. ad essa: es. lun alle 12:50 <br/>
-      Il box viene ridimensionato e posizionato automaticam. sulla tabella in base agli attrib. data-day, data-start e data-stop presenti nel box stesso (HTML5).<br/>
+      Il box viene ridimensionato e posizionato automaticam. sulla tabella in base agli attrib. data-(day|start|stop), tutti nel formato <code>d|hh:mm</code>, presenti nel box stesso (HTML5).<br/>
       I dati di un box si possono vedere tenendo il mouse sopra al box stesso (tooltip).
     </p>
   </header>
@@ -403,11 +402,43 @@
     </div> <!-- end fixhead -->
     
     <div id="grab-area">
-      <article draggable="true" data-start="0|8:15" data-stop="2|23:37" title="lun 8:15 - mer 23:37">
-        <img draggable="false" src="t.svg"></img>
+      <article draggable="true" data-start="0|8:00" data-stop="2|5:20" title="lun 8:00 - mer 5:20">
+        <svg height="80" width="270" version="1.1" width="100%" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;">
+          <rect x="0.079861111111" y="47" width="2" height="8" r="0" rx="0" ry="0" fill="#000000" stroke="#000" style="cursor: pointer;" stroke-width="0"></rect>
+          <text style="text-anchor: start; font: 9px sans-serif; opacity: 0.8;" x="0.0798611111109" y="6" text-anchor="start" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" opacity="0.8"><tspan dy="3.5">MOD D EFFETTUA GIRO LOC E PROVA FRENO AD ARQUATA</tspan></text>
+          <rect x="2.079861111111" y="50" width="11.840277777777777" height="2" r="0" rx="0" ry="0" fill="#000000" stroke="#000" style="cursor: pointer;" stroke-width="0"></rect>
+          <rect x="11.920138888889" y="47" width="116.03472222222217" height="8" r="0" rx="0" ry="0" fill="#000000" stroke="#000" style="cursor: pointer;" stroke-width="0"></rect>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="86.9375" y="37" text-anchor="middle" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px"><tspan dy="3.5">46541/46542</tspan></text>
+          <text style="text-anchor: start; font: 9px sans-serif;" x="11.920138888889" y="55" text-anchor="start" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(1,0,0,1,0,6.52)"><tspan dy="3.5">29</tspan></text>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="11.920138888889" y="47" text-anchor="left" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(0,-1,1,0,-15,56.0118)"><tspan dy="3.5">MI Lte</tspan></text>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="23" y="60" text-anchor="middle" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px"><tspan dy="3.5">10</tspan></text>
+          <text style="text-anchor: end; font: 9px sans-serif; cursor: pointer;" x="127.954861111111" y="47" text-anchor="end" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(1,0,0,1,0,26)"><tspan dy="3.5">07</tspan></text>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="127.954861111111" y="47" text-anchor="middle" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(0,-1,1,0,93.4548,165.1215)"><tspan dy="3.5">ARQTSC</tspan></text>
+          <rect x="127.954861111111" y="47" width="47.361111111111086" height="8" r="0" rx="0" ry="0" fill="#ff6633" stroke="#000" style="cursor: pointer;" stroke-width="0.3"></rect>
+          <text style="text-anchor: start; font: 9px sans-serif;" x="168.6354166666665" y="37" text-anchor="start" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(0,-1,1,0,134.5521,204.5521)"><tspan dy="-9.700000762939453">GIRO</tspan><tspan dy="13.2" x="168.6354166666665">LOC</tspan><tspan dy="13.2" x="168.6354166666665">ARQTSC</tspan></text>
+          <text style="text-anchor: start; font: 9px sans-serif;" x="127.954861111111" y="55" text-anchor="start" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(1,0,0,1,0,6.52)"><tspan dy="3.5">07</tspan></text>
+          <text style="text-anchor: end; font: 9px sans-serif; cursor: pointer;" x="175.3159722222222" y="47" text-anchor="end" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(1,0,0,1,0,26)"><tspan dy="3.5">47</tspan></text>
+          <rect x="175.3159722222222" y="47" width="21.3125" height="8" r="0" rx="0" ry="0" fill="#000000" stroke="#000" style="cursor: pointer;" stroke-width="0"></rect>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="185.9722222222222" y="37" text-anchor="middle" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(0,-1,1,0,165.9722,206.9722)"><tspan dy="3.5">46541/46542</tspan></text>
+          <text style="text-anchor: start; font: 9px sans-serif;" x="175.3159722222222" y="55" text-anchor="start" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(1,0,0,1,0,6.52)"><tspan dy="3.5">47</tspan></text>
+          <rect x="198.6284722222222" y="50" width="53.28124999999999" height="2" r="0" rx="0" ry="0" fill="#000000" stroke="#000" style="cursor: pointer;" stroke-width="0"></rect>
+          <rect x="249.9097222222222" y="47" width="21.3125" height="8" r="0" rx="0" ry="0" fill="#000000" stroke="#000" style="cursor: pointer;" stroke-width="0"></rect>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="260.5659722222222" y="37" text-anchor="middle" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(0,-1,1,0,223.566,281.566)"><tspan dy="3.5">46579/46578</tspan></text>
+        </svg>
       </article>
-      <article draggable="true" data-start="5|9:21" data-stop="6|10:33" title="sab 9:21 - dom 10:33"><span>2</span></article>
-      <article draggable="true" data-start="6|15:56" data-stop="6|22:00" title="dom 15:56 - dom 22:00"><span>3</span></article>
+      
+      <article draggable="true" data-start="5|22:10" data-stop="6|10:10" title="sab 22:10 - dom 10:10">
+        <svg height="80" width="71" version="1.1" xmlns="http://www.w3.org/2000/svg" style="overflow: hidden; position: relative;">
+          <rect x="0" y="47" width="2" height="8" r="0" rx="0" ry="0" fill="#000000" stroke="#000" style="cursor: pointer;" stroke-width="0"></rect>
+          <rect x="0.9583333333333" y="50" width="11.840277777777777" height="2" r="0" rx="0" ry="0" fill="#000000" stroke="#000" style="cursor: pointer;" stroke-width="0"></rect>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="4.8784722222222" y="60" text-anchor="middle" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px"><tspan dy="3.5">10</tspan></text>
+          <rect x="10.798611111111" y="47" width="59.201388888888914" height="8" r="0" rx="0" ry="0" fill="#000000" stroke="#000" style="cursor: pointer;" stroke-width="0"></rect>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="15.798611111111" y="47" text-anchor="middle" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(0,-1,1,0,1703.2986,1772.8903)"><tspan dy="3.5">MI Lte</tspan></text>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="45.3993055555557" y="37" text-anchor="middle" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px"><tspan dy="3.5">46567</tspan></text>
+          <text style="text-anchor: start; font: 9px sans-serif;" x="15.798611111111" y="55" text-anchor="start" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px" transform="matrix(1,0,0,1,0,6.52)"><tspan dy="3.5">10</tspan></text>
+          <text style="text-anchor: middle; font: 9px sans-serif;" x="45.3993055555557" y="37" text-anchor="middle" font="9px sans-serif" stroke="none" fill="#000000" font-size="9px"><tspan dy="3.5">46567</tspan></text>
+        </svg>
+      </article>
     </div>
     
   </div> <!-- end content -->
