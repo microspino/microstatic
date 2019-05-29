@@ -43,59 +43,90 @@
 
 
   </style>
+  <script src="https://unpkg.com/zdog@1/dist/zdog.dist.min.js"></script>
 </head>
 
 <body id="home">
   <header>
-    <h1><a href="/">&micro;Spino Tinkerings</a></h1>
+    <h1><a href="/">Graphics</a></h1>
     <p class="subhead">This is just a list of things i'm tinkering with.
     <p>Find more about me at <a href="https://microspino.com">microspino</a>. <span class="date">Updated May 29, 2019</span></p></p>
   </header>
   <div id="content">
     <section class="col1">
       <article>
-        <h1>HTML+CSS+vanilla JS</h1>
+        <h1>Web Graphics</h1>
         <ul>
           <li>
-            <h2><a href="https://gh.spino.io/drag">Drag n Drop things on a table</a></h2>
+            <h2><a href="https://gh.spino.io/drag">ZDog pseudo 3d engine</a></h2>
             <em>by <a href="https://microspino.com">Daniele Spinosa</a></em>
-            <p>Use just native HTML and SVG elements and a few Drag&amp;Drop event handlers (JS) to move around elements on a table.</p>
-          </li>
-          <li>
-            <h2><a href="https://gh.spino.io/zdog">3d pseudo graphics engine</a></h2>
-            <em>by <a href="https://microspino.com">Daniele Spinosa</a> using David de Sandro ZDog.</em>
-            <p>Will use it to build small towns</p>
+            <p>Use a 3d engine to draw 3d towns. It can render either in Canvas or SVG.</p>
           </li>
         </ul>
       </article>
-      <!-- <article>
-        <h1>Blogging</h1>
-        <ul>
-          <li>
-            <!-- <h2><a href="https://www.red-sweater.com/marsedit/">MarsEdit</a></h2>
-            <em>by <a href="https://red-sweater.com/blog/">Red Sweater</a></em>
-            <p>Write, preview, and publish to just about anywhere from your Mac</p>
-          </li>
-        </ul> 
-      </article>-->
+      
     </section>
     
     <section class="col2">
-        <!--<article>
-          <h1>Podcasting</h1>
-          <ul>
-            <li>
-              <h2><a href="http://supertop.co/castro/">Castro</a></h2>
-              <em>by <a href="https://blog.supertop.co">Supertop</a></em>
-              <p>An iOS podcast app focused on tracking a broad range of shows without getting overwhelmed</p>
-            </li>
-          </ul>
-        </article> -->
+      <article>
+        <p>It will spin automatically until you grab it and turn it on its own.</p>
+        <canvas class="zdog-canvas" width="240" height="240"></canvas>
+      </article>
     </section>
   </div>
   <footer>
         <p>&copy; 2019 <a href="https://microspino.com">Daniele Spinosa</a>.</p>
-
   </footer>
+  
+  <script>
+    let isSpinning = true;
+
+    let illo = new Zdog.Illustration({
+      element: '.zdog-canvas',
+      dragRotate: true,
+      // stop spinning when drag starts
+      onDragStart: function() {
+        isSpinning = false;
+      },
+    });
+
+    // circle
+    new Zdog.Ellipse({
+      addTo: illo,
+      diameter: 80,
+      translate: { z: 40 },
+      stroke: 20,
+      color: '#636',
+    });
+
+    // square
+    new Zdog.Rect({
+      addTo: illo,
+      width: 80,
+      height: 80,
+      translate: { z: -40 },
+      stroke: 12,
+      color: '#E62',
+      fill: true,
+    });
+    
+    // small green square
+    new Zdog.Rect({
+      addTo: illo,
+      width: 40,
+      height: 40,
+      translate: { z: -20 },
+      stroke: 12,
+      color: 'green',
+      fill: true,
+    });
+
+    function animate() {
+      illo.rotate.y += isSpinning ? 0.025 : 0;
+      illo.updateRenderGraph();
+      requestAnimationFrame( animate );
+    }
+    animate();
+  </script>
 </body>
 </html>
