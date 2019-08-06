@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>MicroStatic by Daniele Spinosa - text selection</title>
+  <meta charset="utf-8" />
+  <meta name="description" content="Microstatic by Microspino aka Daniele Spinosa" />
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link href="https://fonts.googleapis.com/css?family=Bitter:400,700" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; line-height: 1.5; }
+    html { background: #f4f7fb; background: radial-gradient(circle, rgba(208,230,237,.2) 0%, rgba(208,230,237,0.6) 100%); }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      font-size: 13px;
+      font-style: normal;
+      min-width:1056px;
+    }
+    h1, h2, h3, h4, h5, h6 { font-weight: bold; font-family: 'Bitter', serif; font-weight: 700;}
+    a { color: rgba(61, 81, 118, 0.9); color: rgba(53, 119, 190, 0.9)}
+    a:hover, a:active { color: #f60; }
+    .date { font-style: italic; }
+    .subhead { font-size: 1em; padding: .5em 0 0 0;}
+
+    ul { list-style-type: none; margin: 1em 0;  }
+    li { margin-bottom: .75em; }
+    li p, li h2 { margin: 0;}
+    header, footer, table { padding: 20px 5%; margin: 0 0 1em; color: #666; }
+    header h1 { font-weight: normal;  font-size: 3em; float: left; margin: 0 .5em 0 0;}
+    header h1 a { color: rgba(108,130,137,1); text-decoration: none; }
+    h2 { font-size: 1.3em; line-height: .9em; display: inline-block}
+    h2 a { font-weight: normal; text-decoration: none; }
+    /* drag specific CSS */
+    #content { margin:2em 5%; position:relative; }
+    article {max-width:320px;}
+    
+  </style>
+</head>
+
+<body id="home">
+  <header>
+    <h1><a href="/">Text selection</a></h1>
+    
+    <p class="subhead">
+      <strong>Istruzioni:</strong><br/>
+      Selezionare del testo sulla pagina. Il testo selezionato apparir&agrave; nella textarea.
+    </p>
+  </header>
+  
+  <div id="content">
+    <section class="col1">
+      <article>
+        <h3>Testo</h3>
+        <p>
+          &ldquo;Chiamatemi Tiresia, sono qui per raccontarvi una storia pi&ugrave; che secolare che ha avuto una tale quantit&agrave; di trasformazioni da indurmi a voler mettere un punto fermo a questa interminabile deriva. A Siracusa vi dir&ograve; la mia versione dei fatti, e la metter&ograve; a confronto con quello che di me hanno scritto poeti, filosofi e letterati. Voglio sgombrare una volta per tutte il campo da menzogne, illazioni, fantasie e congetture, ristabilendo i termini esatti della verit&agrave;.&rdquo;
+          <br/>
+          <i>Andrea Camilleri</i>
+        </p>
+        
+        <h3>Hai selezionato:</h3>
+        <p>
+          <textarea id="sel" rows="5" cols="40"></textarea>
+        </p>
+      </article>
+    </section>
+    
+    <section class="col2">
+      <article>
+        <p>
+          Il testo selezionato pu&ograve; essere inviato da qualche parte.<br/>
+          <strong>TODO (facile):</strong> trasformarlo in un widget da trascinare dentro la barra preferiti (fatto in JS). Il widget apre una mini finestra nuova. Al suo interno si trova form dotato di una textarea simile a quella presente nella pagina. La textarea è già popolata con il contenuto selezionato. Il form proviene da un server remoto. Nel form sono presenti altre scelte (es. lingua, tags...). Submit del form, suggerimento inviato al server, dramma finito.
+        </p>
+      </article>
+    </section>
+  </div> <!-- end content -->
+  
+  
+  <footer id="footer">
+    <p>&copy; 2019 <a href="https://microspino.com">Daniele Spinosa</a>.</p>
+  </footer>
+  
+  <script>
+    function getSelectionText() {
+        var text = "";
+        var activeEl = document.activeElement;
+        var activeElTagName = activeEl ? activeEl.tagName.toLowerCase() : null;
+        if (
+          (activeElTagName == "textarea") || (activeElTagName == "input" &&
+          /^(?:text|search|password|tel|url)$/i.test(activeEl.type)) &&
+          (typeof activeEl.selectionStart == "number")
+        ) {
+            text = activeEl.value.slice(activeEl.selectionStart, activeEl.selectionEnd);
+        } else if (window.getSelection) {
+            text = window.getSelection().toString();
+        }
+        return text;
+    }
+
+    document.onmouseup = document.onkeyup = document.onselectionchange = function() {
+      document.getElementById("sel").value = getSelectionText();
+    };
+    </script>
+</body>
+</html>
